@@ -7,7 +7,7 @@
  *                                                                             *
  * audit trail                                                                 *
  * 11-MAY-2026  rg  first version                                              *
- * 17-MAX-2026  rg  added include guards, additional data types, and minimum   *
+ * 17-MAY-2026  rg  added include guards, additional data types, and minimum   *
  *                  and maximum value definitions                              *
  *                                                                             *
  * TODO                                                                        *
