@@ -60,9 +60,9 @@
  * source code tree
  */
 #ifndef __NO_INC_SYS_LIMITS_H
-#ifndef __LIMITS_H
-  #include <limits.h>
-#endif /* __LIMITS_H */
+    #ifndef __LIMITS_H
+        #include <limits.h>
+    #endif /* __LIMITS_H */
 #endif /* __NO_INC_SYS_LIMITS_H */
 
 
@@ -72,49 +72,49 @@
  * -----------------------------------------------------------------------------
  */
 #ifndef _INT8_T
-#define _INT8_T
-typedef signed char         int8_t;
+    #define _INT8_T
+    typedef signed char         int8_t;
 #endif /* _INT8_T */
 
 #ifndef _INT16_T
-#define _INT16_T
-typedef signed short       int16_t;
+    #define _INT16_T
+    typedef signed short       int16_t;
 #endif /* _INT16_T */
 
 #ifndef _INT32_T
-#define _INT32_T
-typedef signed int         int32_t;
+    #define _INT32_T
+    typedef signed int         int32_t;
 #endif /* _INT32_T */
 
 #ifdef __EXTENDED__
-/* long long is only defined when langlvl is extended */
-#ifndef _INT64_T
-#define _INT64_T
-typedef signed long long   int64_t;
-#endif /* _INT64_T */
+    /* long long is only defined when langlvl is extended */
+    #ifndef _INT64_T
+        #define _INT64_T
+        typedef signed long long   int64_t;
+    #endif /* _INT64_T */
 #endif /* __EXTENDED__ */
 
 #ifndef _UINT8_T
-#define _UINT8_T
-typedef unsigned char       uint8_t;
+    #define _UINT8_T
+    typedef unsigned char       uint8_t;
 #endif /* _UINT8_T */
 
 #ifndef _UINT16_T
-#define _UINT16_T
-typedef unsigned short     uint16_t;
+    #define _UINT16_T
+    typedef unsigned short     uint16_t;
 #endif /* _UINT16_T */
 
 #ifndef _UINT32_T
-#define _UINT32_T
-typedef unsigned int       uint32_t;
+    #define _UINT32_T
+    typedef unsigned int       uint32_t;
 #endif /* _UINT32_T */
 
 #ifdef __EXTENDED__
-/* long long is only defined when langlvl is extended */
-#ifndef _UINT64_T
-#define _UINT64_T
-typedef unsigned long long uint64_t;
-#endif /* _UINT64_T */
+    /* long long is only defined when langlvl is extended */
+    #ifndef _UINT64_T
+        #define _UINT64_T
+        typedef unsigned long long uint64_t;
+    #endif /* _UINT64_T */
 #endif /* __EXTENDED__ */
 
 
@@ -128,121 +128,121 @@ typedef unsigned long long uint64_t;
  * -----------------------------------------------------------------------------
  */
 #ifndef _INT8_MIN
-#define _INT8_MIN
-#ifdef SCHAR_MIN
-#define INT8_MIN SCHAR_MIN
-#else
-#define INT8_MIN (-128)
-#endif /* SCHAR_MIN */
+    #define _INT8_MIN
+    #ifdef SCHAR_MIN
+        #define INT8_MIN SCHAR_MIN
+    #else
+        #define INT8_MIN (-128)
+    #endif /* SCHAR_MIN */
 #endif /* _INT8_MIN */
 
 #ifndef _INT8_MAX
-#define _INT8_MAX
-#ifdef SCHAR_MAX
-#define INT8_MAX SCHAR_MAX
-#else
-#define INT8_MAX 127
-#endif /* SCHAR_MAX */
+    #define _INT8_MAX
+    #ifdef SCHAR_MAX
+        #define INT8_MAX SCHAR_MAX
+    #else
+        #define INT8_MAX 127
+    #endif /* SCHAR_MAX */
 #endif /* _INT8_MAX */
 
 #ifndef _INT16_MIN
-#define _INT16_MIN
-#ifdef SHRT_MIN
-#define _INT16_MIN SHRT_MIN
-#else
-#define _INT16_MIN (-32768)
-#endif /* SHRT_MIN */
+    #define _INT16_MIN
+    #ifdef SHRT_MIN
+        #define INT16_MIN SHRT_MIN
+    #else
+        #define INT16_MIN (-32768)
+    #endif /* SHRT_MIN */
 #endif /* _INT16_MIN */
 
 #ifndef _INT16_MAX
-#define _INT16_MAX
-#ifdef SHRT_MAX
-#define _INT16_MAX SHRT_MAX
-#else
-#define _INT16_MAX 32767
-#endif /* SHRT_MAX */
+    #define _INT16_MAX
+    #ifdef SHRT_MAX
+        #define INT16_MAX SHRT_MAX
+    #else
+        #define INT16_MAX 32767
+    #endif /* SHRT_MAX */
 #endif /* _INT16_MAX */
 
 #ifndef _INT32_MIN
-#define _INT32_MIN
-#ifdef INT_MIN
-#define _INT32_MIN INT_MIN
-#else
-#define _INT32_MIN (-2147483647-1)
-#endif /* INT_MIN */
+    #define _INT32_MIN
+    #ifdef INT_MIN
+        #define INT32_MIN INT_MIN
+    #else
+        #define INT32_MIN (-2147483647-1)
+    #endif /* INT_MIN */
 #endif /* _INT32_MIN */
 
 #ifndef _INT32_MAX
-#define _INT32_MAX
-#ifdef INT_MAX
-#define _INT32_MAX INT_MAX
-#else
-#define _INT32_MAX 2147483647
-#endif /* INT_MAX */
+    #define _INT32_MAX
+    #ifdef INT_MAX
+        #define INT32_MAX INT_MAX
+    #else
+        #define INT32_MAX 2147483647
+    #endif /* INT_MAX */
 #endif /* _INT32_MAX */
 
 #ifdef __EXTENDED__
-/* long long is only defined when langlvl is extended */
-#ifndef _INT64_MIN
-#define _INT64_MIN
-#ifdef LONGLONG_MIN
-#define _INT64_MIN LONGLONG_MIN
-#else
-#define _INT64_MIN (-9223372036854775807LL-1LL)
-#endif /* LONGLONG_MIN */
-#endif /* _INT64_MIN */
+    /* long long is only defined when langlvl is extended */
+    #ifndef _INT64_MIN
+        #define _INT64_MIN
+        #ifdef LONGLONG_MIN
+            #define INT64_MIN LONGLONG_MIN
+        #else
+            #define INT64_MIN (-9223372036854775807LL-1LL)
+        #endif /* LONGLONG_MIN */
+    #endif /* _INT64_MIN */
 #endif /* __EXTENDED__ */
 
 #ifdef __EXTENDED__
-/* long long is only defined when langlvl is extended */
-#ifndef _INT64_MAX
-#define _INT64_MAX
-#ifdef LONGLONG_MAX
-#define _INT64_MAX LONGLONG_MAX
-#else
-#define _INT64_MAX 9223372036854775807LL
-#endif /* LONGLONG_MAX */
-#endif /* _INT64_MAX */
+    /* long long is only defined when langlvl is extended */
+    #ifndef _INT64_MAX
+        #define _INT64_MAX
+        #ifdef LONGLONG_MAX
+            #define INT64_MAX LONGLONG_MAX
+        #else
+            #define INT64_MAX 9223372036854775807LL
+        #endif /* LONGLONG_MAX */
+    #endif /* _INT64_MAX */
 #endif /* __EXTENDED__ */
 
 #ifndef _UINT8_MAX
-#define _UINT8_MAX
-#ifdef UCHAR_MAX
-#define UINT8_MAX UCHAR_MAX
-#else
-#define UINT8_MAX 255U
-#endif /* UCHAR_MAX */
+    #define _UINT8_MAX
+    #ifdef UCHAR_MAX
+        #define UINT8_MAX UCHAR_MAX
+    #else
+        #define UINT8_MAX 255U
+    #endif /* UCHAR_MAX */
 #endif /* _UINT8_MAX */
 
 #ifndef _UINT16_MAX
-#define _UINT16_MAX
-#ifdef USHRT_MAX
-#define _UINT16_MAX USHRT_MAX
-#else
-#define _UINT16_MAX 65535U
-#endif /* USHRT_MAX */
+    #define _UINT16_MAX
+    #ifdef USHRT_MAX
+        #define UINT16_MAX USHRT_MAX
+    #else
+        #define UINT16_MAX 65535U
+    #endif /* USHRT_MAX */
 #endif /* _UINT16_MAX */
 
 #ifndef _UINT32_MAX
-#define _UINT32_MAX
-#ifdef UINT_MAX
-#define _UINT32_MAX UINT_MAX
-#else
-#define _UINT32_MAX 4294967295U
-#endif /* UINT_MAX */
+    #define _UINT32_MAX
+    #ifdef UINT_MAX
+        #define UINT32_MAX UINT_MAX
+    #else
+        #define UINT32_MAX 4294967295U
+    #endif /* UINT_MAX */
 #endif /* _UINT32_MAX */
 
 #ifdef __EXTENDED__
-/* long long is only defined when langlvl is extended */
-#ifndef _UINT64_MAX
-#define _UINT64_MAX
-#ifdef ULONGLONG_MAX
-#define _UINT64_MAX ULONGLONG_MAX
-#else
-#define _UINT64_MAX 18446744073709551615ULL
-#endif /* ULONGLONG_MAX */
-#endif /* _UINT64_MAX */
+    /* long long is only defined when langlvl is extended */
+    #ifndef _UINT64_MAX
+        #define _UINT64_MAX
+        #ifdef ULONGLONG_MAX
+            #define UINT64_MAX ULONGLONG_MAX
+        #else
+            #define UINT64_MAX 18446744073709551615ULL
+        #endif /* ULONGLONG_MAX */
+    #endif /* _UINT64_MAX */
 #endif /* __EXTENDED__ */
 
 
-#ENDIF /* __STDINT_H */
+#endif /* __STDINT_H */
