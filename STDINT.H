@@ -9,6 +9,8 @@
  * 11-MAY-2026  rg  first version                                              *
  * 17-MAY-2026  rg  added include guards, additional data types, and minimum   *
  *                  and maximum value definitions                              *
+ * 18-MAY-2026  rg  added pragmas to suspend checkout messages, made it con-   *
+ *                  figurable                                                  *
  *                                                                             *
  * TODO                                                                        *
  * - add "least" types                                                         *
@@ -41,6 +43,16 @@
  * For more information, please refer to <https://unlicense.org/>              *
  *******************************************************************************
  */
+
+/*
+ * suppress checkout messages in compiler log (default)
+ * can be enabled by #define
+ */
+#ifndef __DEBUG_STDINT_H
+    #pragma checkout(suspend)
+#else
+    #pragma checkout(resume)
+#endif
 
 /*
  * include guard to permit including stdint.h more than once
@@ -246,3 +258,11 @@
 
 
 #endif /* __STDINT_H */
+
+
+/*
+ * reenable checkout messages in compiler log
+ */
+#ifndef __DEBUG_STDINT_H
+    #pragma checkout(resume)
+#endif
