@@ -5,6 +5,13 @@
  * partly as defined in the ANSI C99 standard                                  *
  * put together by Ralph Graulich                                              *
  *                                                                             *
+ * reference material used                                                     *
+ * -----------------------                                                     *
+ * https://pubs.opengroup.org/onlinepubs/009695299/basedefs/stdint.h.html      *
+ * IBM "ILE C for AS/400 Language Reference" (SC09-2711-01)                    *
+ * IBM "ILE C for AS/400 Programmer's Guide" (SC09-2712-01)                    *
+ * IBM "ILE C for AS/400 Run-Time Library Reference" (SC41-5607-00)            *
+ *                                                                             *
  * audit trail                                                                 *
  * 11-MAY-2026  rg  first version                                              *
  * 17-MAY-2026  rg  added include guards, additional data types, and minimum   *
@@ -80,45 +87,45 @@
 
 /*
  * -----------------------------------------------------------------------------
- * definitions for generic data types
+ * exact-width integer type
  * -----------------------------------------------------------------------------
  */
 #ifndef _INT8_T
     #define _INT8_T
-    typedef signed char         int8_t;
+    typedef signed char           int8_t;
 #endif /* _INT8_T */
 
 #ifndef _INT16_T
     #define _INT16_T
-    typedef signed short       int16_t;
+    typedef signed short         int16_t;
 #endif /* _INT16_T */
 
 #ifndef _INT32_T
     #define _INT32_T
-    typedef signed int         int32_t;
+    typedef signed int           int32_t;
 #endif /* _INT32_T */
 
 #ifdef __EXTENDED__
     /* long long is only defined when langlvl is extended */
     #ifndef _INT64_T
         #define _INT64_T
-        typedef signed long long   int64_t;
+        typedef signed long long int64_t;
     #endif /* _INT64_T */
 #endif /* __EXTENDED__ */
 
 #ifndef _UINT8_T
     #define _UINT8_T
-    typedef unsigned char       uint8_t;
+    typedef unsigned char           uint8_t;
 #endif /* _UINT8_T */
 
 #ifndef _UINT16_T
     #define _UINT16_T
-    typedef unsigned short     uint16_t;
+    typedef unsigned short         uint16_t;
 #endif /* _UINT16_T */
 
 #ifndef _UINT32_T
     #define _UINT32_T
-    typedef unsigned int       uint32_t;
+    typedef unsigned int           uint32_t;
 #endif /* _UINT32_T */
 
 #ifdef __EXTENDED__
@@ -132,7 +139,7 @@
 
 /*
  * -----------------------------------------------------------------------------
- * definitions for minimum and maximum for the data types
+ * definitions for minimum and maximum for exact-width integer types
  * -----------------------------------------------------------------------------
  * reuse suitable definitions if they already exist, for example if limits.h
  * was included correctly
@@ -254,6 +261,58 @@
             #define UINT64_MAX 18446744073709551615ULL
         #endif /* ULONGLONG_MAX */
     #endif /* _UINT64_MAX */
+#endif /* __EXTENDED__ */
+
+
+/*
+ * -----------------------------------------------------------------------------
+ * minimum-width integer type
+ * -----------------------------------------------------------------------------
+ */
+#ifndef _INT_LEAST8_T
+    #define _INT_LEAST8_T
+    typedef signed char           int_least8_t;
+#endif /* _INT_LEAST8_T */
+
+#ifndef _INT_LEAST16_T
+    #define _INT_LEAST16_T
+    typedef signed short         int_least16_t;
+#endif /* _INT_LEAST16_T */
+
+#ifndef _INT_LEAST32_T
+    #define _INT_LEAST32_T
+    typedef signed int           int_least32_t;
+#endif /* _INT_LEAST32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifndef _INT_LEAST64_T
+        #define _INT_LEAST64_T
+        typedef signed long long int_least64_t;
+    #endif /* _INT_LEAST64_T */
+#endif /* __EXTENDED__ */
+
+#ifndef _UINT_LEAST8_t
+    #define _UINT_LEAST8_t
+    typedef unsigned char           uint_least8_t;
+#endif /* _UINT_LEAST8_T */
+
+#ifndef _UINT_LEAST16_T
+    #define _UINT_LEAST16_T
+    typedef unsigned short         uint_least16_t;
+#endif /* _UINT_LEAST16_T */
+
+#ifndef _UINT_LEAST32_T
+    #define _UINT_LEAST32_T
+    typedef unsigned int           uint_least32_t;
+#endif /* _UINT_LEAST32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifndef _UINT_LEAST64_T
+        #define _UINT_LEAST64_T
+        typedef unsigned long long uint_least64_t;
+    #endif /* _UINT_LEAST64_T */
 #endif /* __EXTENDED__ */
 
 
