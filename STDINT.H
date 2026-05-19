@@ -12,16 +12,8 @@
  * IBM "ILE C for AS/400 Programmer's Guide" (SC09-2712-01)                    *
  * IBM "ILE C for AS/400 Run-Time Library Reference" (SC41-5607-00)            *
  *                                                                             *
- * audit trail                                                                 *
- * 11-MAY-2026  rg  first version                                              *
- * 17-MAY-2026  rg  added include guards, additional data types, and minimum   *
- *                  and maximum value definitions                              *
- * 18-MAY-2026  rg  added pragmas to suspend checkout messages, made it con-   *
- *                  figurable                                                  *
- *                                                                             *
  * TODO                                                                        *
- * - add "least" types                                                         *
- * - add "fast" types                                                          *
+ * ----                                                                        *
  * - add "pointer" types                                                       *
  *******************************************************************************
  * This is free and unencumbered software released into the public domain.     *
@@ -87,29 +79,30 @@
 
 /*
  * -----------------------------------------------------------------------------
- * exact-width integer type
+ * exact-width integer types
  * -----------------------------------------------------------------------------
  */
+
 #ifndef _INT8_T
     #define _INT8_T
-    typedef signed char           int8_t;
+    typedef signed char              int8_t;
 #endif /* _INT8_T */
 
 #ifndef _INT16_T
     #define _INT16_T
-    typedef signed short         int16_t;
+    typedef signed short            int16_t;
 #endif /* _INT16_T */
 
 #ifndef _INT32_T
     #define _INT32_T
-    typedef signed int           int32_t;
+    typedef signed int              int32_t;
 #endif /* _INT32_T */
 
 #ifdef __EXTENDED__
     /* long long is only defined when langlvl is extended */
     #ifndef _INT64_T
         #define _INT64_T
-        typedef signed long long int64_t;
+        typedef signed long long    int64_t;
     #endif /* _INT64_T */
 #endif /* __EXTENDED__ */
 
@@ -141,158 +134,136 @@
  * -----------------------------------------------------------------------------
  * definitions for minimum and maximum for exact-width integer types
  * -----------------------------------------------------------------------------
+ * only define minimum and maximum values if the base type is defined
  * reuse suitable definitions if they already exist, for example if limits.h
  * was included correctly
  * otherwise we will define our own and therefore provide sane defaults instead
  * -----------------------------------------------------------------------------
  */
-#ifndef _INT8_MIN
-    #define _INT8_MIN
+
+#ifdef _INT8_T
     #ifdef SCHAR_MIN
         #define INT8_MIN SCHAR_MIN
     #else
         #define INT8_MIN (-128)
     #endif /* SCHAR_MIN */
-#endif /* _INT8_MIN */
-
-#ifndef _INT8_MAX
-    #define _INT8_MAX
     #ifdef SCHAR_MAX
         #define INT8_MAX SCHAR_MAX
     #else
         #define INT8_MAX 127
     #endif /* SCHAR_MAX */
-#endif /* _INT8_MAX */
+#endif /* _INT8_T */
 
-#ifndef _INT16_MIN
-    #define _INT16_MIN
+#ifdef _INT16_T
     #ifdef SHRT_MIN
         #define INT16_MIN SHRT_MIN
     #else
         #define INT16_MIN (-32768)
     #endif /* SHRT_MIN */
-#endif /* _INT16_MIN */
-
-#ifndef _INT16_MAX
-    #define _INT16_MAX
     #ifdef SHRT_MAX
         #define INT16_MAX SHRT_MAX
     #else
         #define INT16_MAX 32767
     #endif /* SHRT_MAX */
-#endif /* _INT16_MAX */
+#endif /* _INT16_T */
 
-#ifndef _INT32_MIN
-    #define _INT32_MIN
+#ifdef _INT32_T
     #ifdef INT_MIN
         #define INT32_MIN INT_MIN
     #else
         #define INT32_MIN (-2147483647-1)
     #endif /* INT_MIN */
-#endif /* _INT32_MIN */
-
-#ifndef _INT32_MAX
-    #define _INT32_MAX
     #ifdef INT_MAX
         #define INT32_MAX INT_MAX
     #else
         #define INT32_MAX 2147483647
     #endif /* INT_MAX */
-#endif /* _INT32_MAX */
+#endif /* _INT32_T */
 
 #ifdef __EXTENDED__
     /* long long is only defined when langlvl is extended */
-    #ifndef _INT64_MIN
-        #define _INT64_MIN
+    #ifdef _INT64_T
         #ifdef LONGLONG_MIN
             #define INT64_MIN LONGLONG_MIN
         #else
             #define INT64_MIN (-9223372036854775807LL-1LL)
         #endif /* LONGLONG_MIN */
-    #endif /* _INT64_MIN */
-#endif /* __EXTENDED__ */
-
-#ifdef __EXTENDED__
-    /* long long is only defined when langlvl is extended */
-    #ifndef _INT64_MAX
-        #define _INT64_MAX
+    #endif /* _INT64_T */
+    #ifdef _INT64_T
         #ifdef LONGLONG_MAX
             #define INT64_MAX LONGLONG_MAX
         #else
             #define INT64_MAX 9223372036854775807LL
         #endif /* LONGLONG_MAX */
-    #endif /* _INT64_MAX */
+    #endif /* _INT64_T */
 #endif /* __EXTENDED__ */
 
-#ifndef _UINT8_MAX
-    #define _UINT8_MAX
+#ifdef _UINT8_T
     #ifdef UCHAR_MAX
         #define UINT8_MAX UCHAR_MAX
     #else
         #define UINT8_MAX 255U
     #endif /* UCHAR_MAX */
-#endif /* _UINT8_MAX */
+#endif /* _UINT8_T */
 
-#ifndef _UINT16_MAX
-    #define _UINT16_MAX
+#ifdef _UINT16_T
     #ifdef USHRT_MAX
         #define UINT16_MAX USHRT_MAX
     #else
         #define UINT16_MAX 65535U
     #endif /* USHRT_MAX */
-#endif /* _UINT16_MAX */
+#endif /* _UINT16_T */
 
-#ifndef _UINT32_MAX
-    #define _UINT32_MAX
+#ifdef _UINT32_T
     #ifdef UINT_MAX
         #define UINT32_MAX UINT_MAX
     #else
         #define UINT32_MAX 4294967295U
     #endif /* UINT_MAX */
-#endif /* _UINT32_MAX */
+#endif /* _UINT32_T */
 
 #ifdef __EXTENDED__
     /* long long is only defined when langlvl is extended */
-    #ifndef _UINT64_MAX
-        #define _UINT64_MAX
+    #ifdef _UINT64_T
         #ifdef ULONGLONG_MAX
             #define UINT64_MAX ULONGLONG_MAX
         #else
             #define UINT64_MAX 18446744073709551615ULL
         #endif /* ULONGLONG_MAX */
-    #endif /* _UINT64_MAX */
+    #endif /* _UINT64_T */
 #endif /* __EXTENDED__ */
 
 
 /*
  * -----------------------------------------------------------------------------
- * minimum-width integer type
+ * minimum-width integer types
  * -----------------------------------------------------------------------------
  */
+
 #ifndef _INT_LEAST8_T
     #define _INT_LEAST8_T
-    typedef signed char           int_least8_t;
+    typedef signed char              int_least8_t;
 #endif /* _INT_LEAST8_T */
 
 #ifndef _INT_LEAST16_T
     #define _INT_LEAST16_T
-    typedef signed short         int_least16_t;
+    typedef signed short            int_least16_t;
 #endif /* _INT_LEAST16_T */
 
 #ifndef _INT_LEAST32_T
     #define _INT_LEAST32_T
-    typedef signed int           int_least32_t;
+    typedef signed int              int_least32_t;
 #endif /* _INT_LEAST32_T */
 
 #ifdef __EXTENDED__
     /* long long is only defined when langlvl is extended */
     #ifndef _INT_LEAST64_T
         #define _INT_LEAST64_T
-        typedef signed long long int_least64_t;
+        typedef signed long long    int_least64_t;
     #endif /* _INT_LEAST64_T */
 #endif /* __EXTENDED__ */
 
-#ifndef _UINT_LEAST8_t
+#ifndef _UINT_LEAST8_T
     #define _UINT_LEAST8_t
     typedef unsigned char           uint_least8_t;
 #endif /* _UINT_LEAST8_T */
@@ -316,12 +287,271 @@
 #endif /* __EXTENDED__ */
 
 
-#endif /* __STDINT_H */
+/*
+ * -----------------------------------------------------------------------------
+ * definitions for minimum and maximum for minimum-width integer types
+ * -----------------------------------------------------------------------------
+ * only define minimum and maximum values if the base type is defined
+ * reuse suitable definitions if they already exist, for example if limits.h
+ * was included correctly
+ * otherwise we will define our own and therefore provide sane defaults instead
+ * -----------------------------------------------------------------------------
+ */
+ 
+#ifdef _INT8_T
+    #ifdef SCHAR_MIN
+        #define INT_LEAST8_MIN SCHAR_MIN
+    #else
+        #define INT_LEAST8_MIN (-128)
+    #endif /* SCHAR_MIN */
+    #ifdef SCHAR_MAX
+        #define INT_LEAST8_MAX SCHAR_MAX
+    #else
+        #define INT_LEAST8_MAX 127
+    #endif /* SCHAR_MAX */
+#endif /* _INT8_T */
+
+#ifdef _INT16_T
+    #ifdef SHRT_MIN
+        #define INT_LEAST16_MIN SHRT_MIN
+    #else
+        #define INT_LEAST16_MIN (-32768)
+    #endif /* SHRT_MIN */
+    #ifdef SHRT_MAX
+        #define INT_LEAST16_MAX SHRT_MAX
+    #else
+        #define INT_LEAST16_MAX 32767
+    #endif /* SHRT_MAX */
+#endif /* _INT16_T */
+
+#ifdef _INT32_T
+    #ifdef INT_MIN
+        #define INT_LEAST32_MIN INT_MIN
+    #else
+        #define INT_LEAST32_MIN (-2147483647-1)
+    #endif /* INT_MIN */
+    #ifdef INT_MAX
+        #define INT_LEAST32_MAX INT_MAX
+    #else
+        #define INT_LEAST32_MAX 2147483647
+    #endif /* INT_MAX */
+#endif /* _INT32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifdef _INT64_T
+        #ifdef LONGLONG_MIN
+            #define INT_LEAST64_MIN LONGLONG_MIN
+        #else
+            #define INT_LEAST64_MIN (-9223372036854775807LL-1LL)
+        #endif /* LONGLONG_MIN */
+    #endif /* _INT64_T */
+    #ifdef _INT64_T
+        #ifdef LONGLONG_MAX
+            #define INT_LEAST64_MAX LONGLONG_MAX
+        #else
+            #define INT_LEAST64_MAX 9223372036854775807LL
+        #endif /* LONGLONG_MAX */
+    #endif /* _INT64_T */
+#endif /* __EXTENDED__ */
+
+#ifdef _UINT8_T
+    #ifdef UCHAR_MAX
+        #define UINT_LEAST8_MAX UCHAR_MAX
+    #else
+        #define UINT_LEAST8_MAX 255U
+    #endif /* UCHAR_MAX */
+#endif /* _UINT8_T */
+
+#ifdef _UINT16_T
+    #ifdef USHRT_MAX
+        #define UINT_LEAST16_MAX USHRT_MAX
+    #else
+        #define UINT_LEAST16_MAX 65535U
+    #endif /* USHRT_MAX */
+#endif /* _UINT16_T */
+
+#ifdef _UINT32_T
+    #ifdef UINT_MAX
+        #define UINT_LEAST32_MAX UINT_MAX
+    #else
+        #define UINT_LEAST32_MAX 4294967295U
+    #endif /* UINT_MAX */
+#endif /* _UINT32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifdef _UINT64_T
+        #ifdef ULONGLONG_MAX
+            #define UINT_LEAST64_MAX ULONGLONG_MAX
+        #else
+            #define UINT_LEAST64_MAX 18446744073709551615ULL
+        #endif /* ULONGLONG_MAX */
+    #endif /* _UINT64_T */
+#endif /* __EXTENDED__ */
 
 
 /*
- * reenable checkout messages in compiler log
+ * -----------------------------------------------------------------------------
+ * fastest minimum-width integer types
+ * -----------------------------------------------------------------------------
  */
+#ifndef _INT_FAST8_T
+    #define _INT_FAST8_T
+    typedef signed char              int_fast8_t;
+#endif /* _INT_FAST_T */
+
+#ifndef _INT_FAST16_T
+    #define _INT_FAST16_T
+    typedef signed short            int_fast16_t;
+#endif /* _INT_FAST16_T */
+
+#ifndef _INT_FAST32_T
+    #define _INT_FAST32_T
+    typedef signed int              int_fast32_t;
+#endif /* _INT_FAST32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifndef _INT_FAST64_T
+        #define _INT_FAST64_T
+        typedef signed long long    int_fast64_t;
+    #endif /* _INT_FAST64_T */
+#endif /* __EXTENDED__ */
+
+#ifndef _UINT_FAST8_T
+    #define _UINT_FAST8_T
+    typedef unsigned char           uint_fast8_t;
+#endif /* _UINT_FAST8_T */
+
+#ifndef _UINT_FAST16_T
+    #define _UINT_FAST16_T
+    typedef unsigned short         uint_fast16_t;
+#endif /* _UINT_FAST16_T */
+
+#ifndef _UINT_FAST32_T
+    #define _UINT_FAST32_T
+    typedef unsigned int           uint_fast32_t;
+#endif /* _UINT_FAST32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifndef _UINT_FAST64_T
+        #define _UINT_FAST64_T
+        typedef unsigned long long uint_fast64_t;
+    #endif /* _UINT_FAST64_T */
+#endif /* __EXTENDED__ */
+
+
+/*
+ * -----------------------------------------------------------------------------
+ * definitions for minimum and maximum for fastest minimum-width integer types
+ * -----------------------------------------------------------------------------
+ * only define minimum and maximum values if the base type is defined
+ * reuse suitable definitions if they already exist, for example if limits.h
+ * was included correctly
+ * otherwise we will define our own and therefore provide sane defaults instead
+ * -----------------------------------------------------------------------------
+ */
+ 
+#ifdef _INT8_T
+    #ifdef SCHAR_MIN
+        #define INT_FAST8_MIN SCHAR_MIN
+    #else
+        #define INT_FAST8_MIN (-128)
+    #endif /* SCHAR_MIN */
+    #ifdef SCHAR_MAX
+        #define INT_FAST8_MAX SCHAR_MAX
+    #else
+        #define INT_FAST8_MAX 127
+    #endif /* SCHAR_MAX */
+#endif /* _INT8_T */
+
+#ifdef _INT16_T
+    #ifdef SHRT_MIN
+        #define INT_FAST16_MIN SHRT_MIN
+    #else
+        #define INT_FAST16_MIN (-32768)
+    #endif /* SHRT_MIN */
+    #ifdef SHRT_MAX
+        #define INT_FAST16_MAX SHRT_MAX
+    #else
+        #define INT_FAST16_MAX 32767
+    #endif /* SHRT_MAX */
+#endif /* _INT16_T */
+
+#ifdef _INT32_T
+    #ifdef INT_MIN
+        #define INT_FAST32_MIN INT_MIN
+    #else
+        #define INT_FAST32_MIN (-2147483647-1)
+    #endif /* INT_MIN */
+    #ifdef INT_MAX
+        #define INT_FAST32_MAX INT_MAX
+    #else
+        #define INT_FAST32_MAX 2147483647
+    #endif /* INT_MAX */
+#endif /* _INT32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifdef _INT64_T
+        #ifdef LONGLONG_MIN
+            #define INT_FAST64_MIN LONGLONG_MIN
+        #else
+            #define INT_FAST64_MIN (-9223372036854775807LL-1LL)
+        #endif /* LONGLONG_MIN */
+    #endif /* _INT64_T */
+    #ifdef _INT64_T
+        #ifdef LONGLONG_MAX
+            #define INT_FAST64_MAX LONGLONG_MAX
+        #else
+            #define INT_FAST64_MAX 9223372036854775807LL
+        #endif /* LONGLONG_MAX */
+    #endif /* _INT64_T */
+#endif /* __EXTENDED__ */
+
+#ifdef _UINT8_T
+    #ifdef UCHAR_MAX
+        #define UINT_FAST8_MAX UCHAR_MAX
+    #else
+        #define UINT_FAST8_MAX 255U
+    #endif /* UCHAR_MAX */
+#endif /* _UINT8_T */
+
+#ifdef _UINT16_T
+    #ifdef USHRT_MAX
+        #define UINT_FAST16_MAX USHRT_MAX
+    #else
+        #define UINT_FAST16_MAX 65535U
+    #endif /* USHRT_MAX */
+#endif /* _UINT16_T */
+
+#ifdef _UINT32_T
+    #ifdef UINT_MAX
+        #define UINT_FAST32_MAX UINT_MAX
+    #else
+        #define UINT_FAST32_MAX 4294967295U
+    #endif /* UINT_MAX */
+#endif /* _UINT32_T */
+
+#ifdef __EXTENDED__
+    /* long long is only defined when langlvl is extended */
+    #ifdef _UINT64_T
+        #ifdef ULONGLONG_MAX
+            #define UINT_FAST64_MAX ULONGLONG_MAX
+        #else
+            #define UINT_FAST64_MAX 18446744073709551615ULL
+        #endif /* ULONGLONG_MAX */
+    #endif /* _UINT64_T */
+#endif /* __EXTENDED__ */
+
+
+/* end of include guard */
+#endif /* __STDINT_H */
+
+
+/* reenable checkout messages in compiler log */
 #ifndef __DEBUG_STDINT_H
     #pragma checkout(resume)
 #endif
